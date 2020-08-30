@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">{%load static %}
+{% load cart_tag %}
+
+<head>
+	<title>OnlineStore BETA</title>
+	<meta charset="utf-8">
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="OnlineStore Template">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+		integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+		integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+	</script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"
+		integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf" crossorigin="anonymous">
+	</script>
+
+	<link rel="stylesheet" type="text/css" href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css'%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
+	</script>
+</head>
+
+
+<body style="background:#fa8e0a61">
+	<div class="super_container">
+	
+		<header class="header trans_300 ">
+			<!-- Top Navigation -->
+
+			<!-- Main Navigation -->
+
+			<div class="main_nav_container fixed-top">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-12 text-right" style="margin-bottom:-14px">
+							<div class="logo_container">
+
+								<a href="{% url 'home' %}" style="margin-right: 67px;">Bestoff<span>s</span>
+								</a>
+								{% comment %} <a>
+									<input class="form-control" type="text" placeholder="Search " aria-label="Search"
+										style=" margin-left: -2px; height: 30px;width: 225px; margin-bottom: 20px;"></input>
+								</a> {% endcomment %}
+							</div>
+							<nav class="navbar">
+								<ul class="navbar_user">
+									{% if user.is_authenticated %}
+									<li>
+										<div class="container">
+											<h6>Hello &nbsp {{request.user.email}}</h6>
+										</div>
+										{% endif %}
+
+									</li>
+									<li class="nav-item dropdown">
+										<a class="nav-link dropdown-toggle waves-effect" href="#" id="navbar-account"
+											data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+											<img alt="user avatar"
+												src="https://secure.gravatar.com/avatar/ed1890c4d87cf4bf1f30f0e41a8b6230?s=24&amp;d=mm&amp;r=g"
+												srcset="https://secure.gravatar.com/avatar/ed1890c4d87cf4bf1f30f0e41a8b6230?s=48&amp;d=mm&amp;r=g 2x"
+												class="avatar avatar-24 photo rounded-circle z-depth-0" height="24"
+												width="24"> </a>
+										<div class="dropdown-menu dropdown-menu-right dropdown-info"
+											aria-labelledby="userDropdown" data-dropdown-in="fadeIn"
+											data-dropdown-out="fadeOut">
+											{% if user.is_authenticated%}
+											<a href="{% url 'register_page' %}" id="navbar-static-profile"
+												class="dropdown-item waves-effect " style="margin-left: 22px;">hello
+												{{request.user.email}}</a>
+											{% else %}
+
+
+											<a href="{% url 'register_page' %}" id="navbar-static-profile"
+												class="dropdown-item waves-effect "
+												style="margin-left: 22px;">Register</a>
+											{% endif %}
+											{% if user.is_authenticated %}
+											<a class="dropdown-item mdb-logout-button" href="{% url 'logout' %} "
+												style="margin-left: 20px;">Log Out</a>
+											{% else %}
+											<a class="dropdown-item mdb-logout-button" href="{% url 'login_page' %} "
+												style="margin-left: 20px;">Login</a>
+											{% endif %}
+
+										</div>
+									</li>
+									{% if user.is_authenticated %}
+									<li class="checkout">
+										<a href="{% url 'cartpage' %}">
+											<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+
+											<span id="checkout_items"
+												class="checkout_items">{{request.session.cart|length}} </span>
+										</a>
+									</li>
+									{% endif %}
+
+								
+							</nav>
+						</div>
+						
+					</div>
+				</div>
+				
+			</div>
+			
+
+		</header>
+	<div>
+	</div>
+    {% comment %} <!--summery data-->
+    <div class= "container" style="margin-top:150px">
+	
+		<div>
+		 {% for key,value in request.session.cart.items %}
+		<h4>Name:{{value.name}}</h4>
+		<h4>Price:{{value.price}}</h4>
+		<h4>Quantity:{{value.quantity}}</h4>
+		<h4> Total: {{ value.price|multiply:value.quantity }}/-</h4>
+		
+		{% endfor %}
+		<div>
+		<h2>Total Amount:{{cart_total_amount}}/-</h2>
+		</div>
+		</div> {% endcomment %}
+		
+  <!--invoice-->
+  <div class="container" style="margin-top:150px">
+    <div class="row" style="margin-bottom: -67px;">
+               
+                {% comment %} <h2>Invoice for purchase #33221</h2> {% endcomment %}
+            <hr>
+			<div class="col-xs-12 col-md-3 col-lg-3 pull-right">
+                    <div class="panel panel-default height">
+                        <div class="panel-heading">Shipping Address</div>
+                        <div class="panel-body">
+                            <strong>{{request.user.email}}</strong><br>
+                           {{request.user.first_name}}<br>
+                            {{request.user.last_name}}<br>
+                            
+                            <strong></strong><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			<div class= "btn" style="margin-left:-14px">
+	<button type="button" class="btn btn-outline-success btn-lg"><a target="_blank" href={% url 'success' %}>Place Order</a></button>
+	</div>
+	<p style="color:black;margin-left:1px">Estimated delivery within 3 hours</p>
+	<img src="{% static 'images/summerylogo.jpeg' %}" class="rounded float-right" alt="..." style="margin-top: -299px;height: 281px;padding-top: 53px;margin-right: 233px;">
+
+	</div>
+		 </div>
+	</div>
+	
+	<hr>
+	<div class= "container" style="margin-top:60px;margin-bottom: -94px;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="text-center"><strong>Order summary</strong></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <td><strong>Item Name</strong></td>
+                                    <td class="text-center"><strong>Item Price</strong></td>
+                                    <td class="text-center"><strong>Item Quantity</strong></td>
+                                    <td class="text-right"><strong>Total</strong></td>
+                                </tr>
+                            </thead>
+							
+                            <tbody>
+							{% for key,value in request.session.cart.items %}
+                                <tr>
+								 
+                                    <td>{{value.name}}</td>
+                                    <td class="text-center">₹ {{value.price}}/-</td>
+                                    <td class="text-center"> {{value.quantity}}</td>
+                                    <td class="text-right">₹ {{ value.price|multiply:value.quantity }}/-</td>
+							
+                                </tr>
+								{% endfor %}
+                                  <tr>
+                                    <td class="highrow"></td>
+                                    <td class="highrow"></td>
+                                    <td class="highrow text-center"><strong>Subtotal</strong></td>
+                                    <td class="highrow text-right">₹ {{cart_total_amount}}/-</td>
+                                </tr>
+                                <tr>
+                                    <td class="emptyrow"></td>
+                                    <td class="emptyrow"></td>
+                                    <td class="emptyrow text-center"><strong>Shipping</strong></td>
+                                    <td class="emptyrow text-right">₹ 0 /-</td>
+                                </tr>
+                                <tr>
+                                    <td class="emptyrow"></td>
+                                    <td class="emptyrow"></td>
+                                    <td class="emptyrow text-center"><strong>Total</strong></td>
+                                    <td class="emptyrow text-right">₹ {{cart_total_amount}}/-</td>
+									<td class="emptyrow"></td>
+                                    
+                                    
+                                </tr>
+                            </tbody>
+			
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	</div>
+	
+
+</div>
+
+<style>
+.height {
+    min-height: 200px;
+}
+
+.icon {
+    font-size: 47px;
+    color: #5CB85C;
+}
+
+.iconbig {
+    font-size: 77px;
+    color: #5CB85C;
+}
+
+.table > tbody > tr > .emptyrow {
+    border-top: none;
+}
+
+.table > thead > tr > .emptyrow {
+    border-bottom: none;
+}
+
+.table > tbody > tr > .highrow {
+    border-top: 3px solid;
+}
+</style>
+
+    </div>
+
+
+
+<script>
+// slight update to account for browsers not supporting e.which
+function disableF5(e) { if ((e.which || e.keyCode) == 116) e.preventDefault(); };
+// To disable f5
+    /* jQuery < 1.7 */
+$(document).bind("keydown", disableF5);
+/* OR jQuery >= 1.7 */
+$(document).on("keydown", disableF5);
+
+// To re-enable f5
+    /* jQuery < 1.7 */
+$(document).unbind("keydown", disableF5);
+/* OR jQuery >= 1.7 */
+$(document).off("keydown", disableF5);
+</script>
+    
+	<script>
+		function storePagePosition() {
+			var page_y = window.pageYOffset;
+			localStorage.setItem("page_y", page_y);
+		}
+
+
+		window.addEventListener("scroll", storePagePosition);
+
+
+		var currentPageY;
+
+		try {
+			currentPageY = localStorage.getItem("page_y");
+
+			if (currentPageY === undefined) {
+				localStorage.setItem("page_y") = 0;
+			}
+
+			window.scrollTo(0, currentPageY);
+		} catch (e) {
+			// no localStorage available
+		}
+	</script>
+
+	<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+	<script src="{% static 'styles/bootstrap4/popper.js' %}"></script>
+	<script src="{% static 'styles/bootstrap4/bootstrap.min.js' %}"></script>
+	<script src="{% static 'plugins/Isotope/isotope.pkgd.min.js'%}"></script>
+	<script src="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
+	<script src="{% static 'plugins/easing/easing.js' %}"></script>
+	<script src="{% static 'js/custom.js' %}"></script>
+</body>
+
+</html>

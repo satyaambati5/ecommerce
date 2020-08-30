@@ -1,0 +1,140 @@
+
+{% comment %} {% load static %}
+{% block title %}Your Cart{% endblock title %}
+{% block body %} {% endcomment %}
+<!DOCTYPE html>
+<html lang="en">{%load static %}
+<head>
+<title>OnlineStore BETA</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="OnlineStore Template">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js" integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf" crossorigin="anonymous"></script>
+{% comment %} 
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!-- Include the above in your HEAD tag -->
+{% endcomment %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" >
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css'%}">
+{% comment %} <link rel="stylesheet" href="{% static 'styles/styleLogin.css' %}" /> {% endcomment %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
+<style>
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+</style>
+</head>
+
+<body >
+
+<div class="container" style="border-bottom:1px solid black;text-align:center">
+	
+	<h4>Welcome To OnlineStore Registration </h4> 
+    
+</div>
+
+<div class="container" >
+
+    
+    <fieldset class="container" style=" margin-right:6%" >
+        <form class="form-horizontal" action="{% url 'save' %}" method="POST">
+        {% csrf_token %}
+        <h4 style="margin-left:10px">Please Register Here</h4>
+        <!-- Text input-->
+        <div class="form-group">
+        <label class="col-md-4 control-label" for="textinput">Enter Your Name</label>  
+        <div class="col-md-4">
+        <input id="textinput" name="first_name" placeholder="Enter Your Name" class="form-control input-md" required="" type="text"style="color:black">
+        <span class="help-block" style="color:red">{{erroru}} </span>  
+        </div>
+        </div>
+        
+
+        {% comment %} <!-- Text input-->
+        <div class="form-group">
+        <label class="col-md-4 control-label" for="textinput">Last Name</label>  
+        <div class="col-md-4">
+        <input id="textinput" name="Last_name" placeholder="Enter your Last Name" class="form-control input-md" required="" type="text">
+        <span class="help-block"> </span>  
+        </div>
+        </div> {% endcomment %}
+
+        <!-- Text input-->
+        <div class="form-group">
+        <label class="col-md-4 control-label" for="textinput">Mobile Number</label>  
+        <div class="col-md-4">
+        <input id="textinput" name="mobile" placeholder="Your Mobile Number" class="form-control input-md" required="" type="number" maxlength="10" style="color:black;">
+        <span class="help-block"> </span>  
+        </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+        <label class="col-md-4 control-label" for="textinput">Email</label>  
+        <div class="col-md-4">
+        <input id="textinput" name="email" id="your_email" placeholder=" Your Email" class="form-control input-md" required="" type="text" style="color:black">
+        <span class="help-block" style="color:red">{{errore}} </span>  
+        </div>
+        </div>
+        <!-- Text input-->
+        <div class="form-group">
+        <label class="col-md-4 control-label" for="textinput">Address</label>  
+        <div class="col-md-4">
+        <input id="textinput" name="address" id="your_email" placeholder="Your Address " class="form-control input-md" required="" type="text" st
+        yle="height:" style="color:black">
+        <span class="help-block"> </span>  
+        </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+        <label class="col-md-4 control-label" for="textinput">Password</label>  
+        <div class="col-md-4">
+        <input id="textinput" name="password" placeholder="Create your Password" class="form-control input-md" required="" type="password" style="color:black">
+        <span class="help-block"></span>  
+        </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+        <label class="col-md-4 control-label" for="textinput">Confirm Password</label>  
+        <div class="col-md-4">
+        <input id="textinput" name="comfirm_password" placeholder="Confirm your Password" class="form-control input-md" required="" type="password" style="color:black">
+        <span class="help-block" style="color:red">{{errorp}}</span>  
+        </div>
+        </div>
+        <!-- Button -->
+        <div class="form-group">
+        <label class="col-md-4 control-label" for="singlebutton"> </label>
+        <div class="col-md-4">
+        <button id="singlebutton" name="register" value="register" class="btn btn-primary">Submit</button>
+        </div>
+        <span class="container"style="font-size:15px; margin-top:10px"><a href="{% url 'login_page' %}" >have an account?</a></span>
+        </div>
+   
+    </fieldset>
+
+    </form>
+</div>
+             
+</body>
+
+</html>

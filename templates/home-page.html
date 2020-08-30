@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en">{%load static %}
+{% load cart_tag %}
+
+<head>
+	<title>OnlineStore BETA</title>
+	<meta charset="utf-8">
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="OnlineStore Template">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+		integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+		integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+	</script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"
+		integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf" crossorigin="anonymous">
+	</script>
+
+	<link rel="stylesheet" type="text/css" href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css'%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
+	</script>
+</head>
+<style>
+	<!--quantity
+	-->
+	.qty
+	.count
+	{
+	color:
+	#000;
+	display:
+	inline-block;
+	vertical-align:
+	top;
+	font-size:
+	25px;
+	font-weight:
+	700;
+	line-height:
+	30px;
+	padding:
+	0
+	2px
+	;
+	min-width:
+	35px;
+	text-align:
+	center;
+	}
+	.qty
+	.plus
+	{
+	cursor:
+	pointer;
+	display:
+	inline-block;
+	vertical-align:
+	top;
+	color:
+	white;
+	width:
+	30px;
+	height:
+	30px;
+	font:
+	30px/1
+	Arial,
+	sans-serif;
+	text-align:
+	center;
+	border-radius:
+	50%;
+	}
+	.qty
+	.minus
+	{
+	cursor:
+	pointer;
+	display:
+	inline-block;
+	vertical-align:
+	top;
+	color:
+	white;
+	width:
+	30px;
+	height:
+	30px;
+	font:
+	30px/1
+	Arial,
+	sans-serif;
+	text-align:
+	center;
+	border-radius:
+	50%;
+	background-clip:
+	padding-box;
+	}
+	div
+	{
+	text-align:
+	center;
+	}
+	.minus:hover
+	{
+	background-color:
+	#717fe0
+	 !important;
+	}
+	.plus:hover
+	{
+	background-color:
+	#717fe0
+	 !important;
+	}
+	/*Prevent
+	text
+	selection*/
+	span
+	{
+	-webkit-user-select:
+	none;
+	-moz-user-select:
+	none;
+	-ms-user-select:
+	none;
+	}
+	input
+	{
+	border:
+	1px
+	black;
+	width:
+	13%;
+	margin-left:
+	20px;
+	padding-left:7px
+	margin-top:
+	3px;
+	}
+	nput::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button
+	{
+	-webkit-appearance:
+	none;
+	margin:
+	0;
+	}
+	input:disabled
+	{
+	background-color:white;
+	}
+	/*********************
+	Shopping
+	Demo-4
+	**********************/
+	.product-grid4,
+	.product-grid4
+	.product-image4
+	{
+	position:
+	relative
+	}
+	.product-grid4
+	{
+	font-family:
+	Poppins,
+	sans-serif;
+	text-align:
+	center;
+	border-radius:
+	5px;
+	overflow:
+	hidden;
+	z-index:
+	1;
+	transition:
+	all
+	.3s
+	ease
+	0s
+	}
+	.product-grid4:hover
+	{
+	box-shadow:
+	0
+	0
+	10px
+	rgba(0,
+	0,
+	0,
+	.2)
+	}
+	.product-grid4
+	.product-image4
+	a
+	{
+	display:
+	block
+	}
+	.product-grid4
+	.product-image4
+	img
+	{
+	width:
+	100%;
+	height:
+	100px
+	}
+	.product-grid4
+	.pic-1
+	{
+	opacity:
+	1;
+	transition:
+	all
+	.5s
+	ease-out
+	0s
+	}
+	.product-grid4
+	.product-discount-label,
+	.product-grid4
+	.product-new-label
+	{
+	color:
+	#fff;
+	background-color:
+	#16a085;
+	font-size:
+	13px;
+	font-weight:
+	800;
+	text-transform:
+	uppercase;
+	line-height:
+	45px;
+	height:
+	45px;
+	width:
+	45px;
+	border-radius:
+	50%;
+	position:
+	absolute;
+	left:
+	10px;
+	top:
+	15px;
+	transition:
+	all
+	.3s
+	}
+	.product-grid4
+	.product-discount-label
+	{
+	left:
+	auto;
+	right:
+	10px;
+	background-color:
+	#d7292a
+	}
+	.product-grid4:hover
+	.product-new-label
+	{
+	opacity:
+	0
+	}
+	.product-grid4
+	.product-content
+	{
+	padding:
+	25px
+	}
+	.product-grid4
+	.title
+	{
+	font-size:
+	15px;
+	font-weight:
+	400;
+	text-transform:
+	capitalize;
+	margin:
+	0
+	0
+	7px;
+	transition:all
+	.3s
+	ease
+	0s
+	}
+	.product-grid4
+	.title
+	a
+	{
+	color:
+	#222
+	}
+	.product-grid4
+	.title
+	a:hover
+	{
+	color:
+	#16a085
+	}
+	.product-grid4
+	.price
+	{
+	color:
+	#16a085;
+	font-size:
+	17px;
+	font-weight:
+	700;
+	margin:
+	0
+	2px
+	15px
+	0;
+	display:block
+	}
+	.product-grid4
+	.price
+	span
+	{
+	color:
+	#909090;
+	font-size:
+	13px;
+	font-weight:
+	400;
+	letter-spacing:
+	0;
+	text-decoration:
+	line-through;
+	text-align:
+	left;
+	vertical-align:
+	middle;
+	display:
+	inline-block
+	}
+	.product-grid4
+	.add-to-cart
+	{
+	border:
+	1px
+	solid
+	#e5e5e5;
+	display:inline-block;
+	padding:10px
+	20px;
+	color:#888;
+	font-weight:600;
+	font-size:14px;
+	border-radius:4px;
+	transition:all
+	.3s
+	}
+	.product-grid4:hover
+	.add-to-cart
+	{
+	border:
+	1px
+	solid
+	transparent;
+	background:#16a085;
+	color:#fff
+	}
+	.product-grid4
+	.add-to-cart:hover
+	{
+	background-color:
+	#505050;
+	box-shadow:
+	0
+	0
+	10px
+	rgba(0,
+	0,
+	0,
+	.5)
+	}
+	@media
+	only
+	screen
+	and
+	(max-width:990px)
+	{
+	.product-grid4
+	{
+	margin-bottom:
+	30px
+	}
+	}
+
+</style>
+
+<body>
+	<div class="super_container">
+	
+		<header class="header trans_300 ">
+			<!-- Top Navigation -->
+
+			<div class="top_nav" style="background:#145f77">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="top_nav_left">free shipping on all u.s orders over 100/-</div>
+						</div>
+						<div class="col-md-6 text-right">
+							<div class="top_nav_right">
+								<ul class="top_nav_menu">
+
+									<!-- Currency / Language / My Account -->
+									{% if user.is_authenticated %}
+									<li class="account" style="background:#145f77">
+										<a href="">
+											My Account
+											<i class="fa fa-angle-down"></i>
+										</a>
+										<ul class="account_selection">
+
+											<li><a href="{% url 'logout' %} "><i class="fa fa-sign-in"
+														aria-hidden="true"></i>Log Out</a></li>
+
+										</ul>
+									</li>
+									{% else %}
+									<li class="account" style="background:#145f77">
+										<a href="#">
+											My Account
+											<i class="fa fa-angle-down"></i>
+										</a>
+										<ul class="account_selection">
+
+											<li><a href="{% url 'login_page' %} "><i class="fa fa-sign-in"
+														aria-hidden="true"></i>Log In</a></li>
+
+											<li><a href="{% url 'register_page' %} "><i class="fa fa-user-plus"
+														aria-hidden="true"></i>Register</a></li>
+										</ul>
+									</li>
+									{% endif %}
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Main Navigation -->
+
+			<div class="main_nav_container">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-12 text-right" style="margin-bottom:-14px">
+							<div class="logo_container">
+
+								<a href="{% url 'home' %}" style="margin-right: 67px;">Bestoff<span>s</span>
+								</a>
+								<a>
+									<input class="form-control" type="text" placeholder="coming soon" aria-label="Search"
+										style=" margin-left: -2px; height: 30px;width: 225px; margin-bottom: 20px;"></input>
+								</a>
+							</div>
+							<nav class="navbar">
+								<ul class="navbar_user">
+									{% if user.is_authenticated %}
+									<li>
+										<div class="container">
+											<h6>Hello &nbsp {{request.user.email}}</h6>
+										</div>
+										{% endif %}
+
+									</li>
+									<li class="nav-item dropdown">
+										<a class="nav-link dropdown-toggle waves-effect" href="#" id="navbar-account"
+											data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+											<img alt="user avatar"
+												src="https://secure.gravatar.com/avatar/ed1890c4d87cf4bf1f30f0e41a8b6230?s=24&amp;d=mm&amp;r=g"
+												srcset="https://secure.gravatar.com/avatar/ed1890c4d87cf4bf1f30f0e41a8b6230?s=48&amp;d=mm&amp;r=g 2x"
+												class="avatar avatar-24 photo rounded-circle z-depth-0" height="24"
+												width="24"> </a>
+										<div class="dropdown-menu dropdown-menu-right dropdown-info"
+											aria-labelledby="userDropdown" data-dropdown-in="fadeIn"
+											data-dropdown-out="fadeOut">
+											{% if user.is_authenticated%}
+											<a href="{% url 'register_page' %}" id="navbar-static-profile"
+												class="dropdown-item waves-effect " style="margin-left: 22px;">hello
+												{{request.user.email}}</a>
+											{% else %}
+
+
+											<a href="{% url 'register_page' %}" id="navbar-static-profile"
+												class="dropdown-item waves-effect "
+												style="margin-left: 22px;">Register</a>
+											{% endif %}
+											{% if user.is_authenticated %}
+											<a class="dropdown-item mdb-logout-button" href="{% url 'logout' %} "
+												style="margin-left: 20px;">Log Out</a>
+											{% else %}
+											<a class="dropdown-item mdb-logout-button" href="{% url 'login_page' %} "
+												style="margin-left: 20px;">Login</a>
+											{% endif %}
+
+										</div>
+									</li>
+									{% if user.is_authenticated %}
+									<li class="checkout">
+										<a href="{% url 'cartpage' %}">
+											<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+
+											<span id="checkout_items"
+												class="checkout_items">{{request.session.cart|length}} </span>
+										</a>
+									</li>
+									{% endif %}
+
+							</nav>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</header>
+
+		
+
+
+		
+		<!-- carousel-->
+		<!--Carousel Wrapper-->
+		
+		<div id="carousel-example-2" class="carousel slide carousel-fade " data-ride="carousel">
+			<!--Indicators-->
+			<ol class="carousel-indicators">
+				<li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
+				<li data-target="#carousel-example-2" data-slide-to="1"></li>
+				<li data-target="#carousel-example-2" data-slide-to="2"></li>
+			</ol>
+			<!--/.Indicators-->
+			<!--Slides-->
+			<div class="carousel-inner" role="listbox">
+				<div class="carousel-item active">
+					<div class="view">
+						<img class="d-block w-100" src="{% static 'images/car1.jpg' %}" alt="First slide" >
+						<div class="mask rgba-black-light"></div>
+					</div>
+					<div class="carousel-caption">
+						<h3 class="h3-responsive">Light mask</h3>
+						<p>First text</p>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<!--Mask color-->
+					<div class="view">
+						<img class="d-block w-100" src="{% static 'images/dairy.jpg' %}" alt="Second slide" >
+						<div class="mask rgba-black-strong"></div>
+					</div>
+					<div class="carousel-caption">
+						<h3 class="h3-responsive">Strong mask</h3>
+						<p>Secondary text</p>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<!--Mask color-->
+					<div class="view">
+						<img class="d-block w-100" src="{% static 'images/car1.jpg' %}" alt="Third slide" >
+						<div class="mask rgba-black-slight"></div>
+					</div>
+					<div class="carousel-caption">
+						<h3 class="h3-responsive">Slight mask</h3>
+						<p>Third text</p>
+					</div>
+				</div>
+			</div>
+			<!--/.Slides-->
+			<!--Controls-->
+			<a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
+			<!--/.Controls-->
+		</div>
+		
+		<!--/.Carousel Wrapper-->
+
+		<!-- Banner -->
+
+		<div class="banner">
+			<div class="col text-center">
+				<div class="section_title" style="margin-bottom:60px">
+					<h2>Categories</h2>
+				</div>
+			</div>
+
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4">
+						<div class="banner_item align-items-center"
+							style="background-image:url({% static 'images/dairy.jpg' %});height:157px">
+
+							<div class="banner_category">
+								<a href="{% url 'categories' %} ">DAIRY</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="banner_item align-items-center"
+							style="background-image:url({% static 'images/vegitables.jpeg' %});height:157px" >
+							<div class="banner_category">
+								<a href="{% url 'categories' %}">VEGETABLES</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="banner_item align-items-center"
+							style="background-image:url({% static 'images/grocery.png'%}) ;height:157px">
+							<div class="banner_category">
+								<a href="{% url 'categories' %}">GROCERIES</a>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+
+		<!-- New Arrivals -->
+
+		<div class="new_arrivals">
+			<div class="container">
+				<div class="row">
+					<div class="col text-center">
+						<div class="section_title new_arrivals_title">
+							<h2>Our Products</h2>
+						</div>
+					</div>
+				</div>
+				{% comment %} <div class="row align-items-center">
+					<div class="col text-center">
+						<div class="new_arrivals_sorting">
+							<ul class="arrivals_grid_sorting clearfix button-group filters-button-group">
+								<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked"
+									data-filter="*">all</li>
+								<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center"
+									data-filter=".dairy">Dairy</li>
+								<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center"
+									data-filter=".vegetables">vegetables</li>
+								<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center"
+									data-filter=".grocery">grocery</li>
+								
+							</ul>
+							
+					</div>
+					
+						
+					</div>
+				</div> {% endcomment %}
+				
+				<div class="row">
+					<div class="col">
+						<div class="product-grid"
+							data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
+
+							{% for product in data %}
+								
+							<div class="product-item {{product.category}}"
+								style="position: absolute;left: 0px;height: 265px;top: 0px;padding-right:5px">
+								<div class="produc product_filter"
+									style="border-right: 1px solid rgb(255 255 255 / 97%);">
+									<div class="product_image" >
+									<img src=" {{product.image.url}}" alt="">
+									</div>
+
+									<div class="product_info">
+										<h6 class="product_name"><a href="">{{product.name}}</a></h6>
+										<div class="product_price"> ₹{{product.price}}/-<span>
+												₹{{product.span_price}}/-</span></div>
+
+									</div>
+									 <div style="margin-top:25px">
+											<button type="button" class="btn " style="border:1px solid #2c19f1;"><a
+												class="add-to-cart" href="{% url 'categories'%}"><b>GO TO STORE</a></button>
+									</div>
+									
+								</div>
+
+							</div>
+							{% endfor %}
+						
+							{% comment %}
+							<!-- Product 1 -->
+							{% for product in data %}
+							<div class="product-item diary">
+								<div class="product product_filter">
+									<div class="product_image">
+										<img src={{product.image.url}} alt="">
+									</div>
+									{% comment %} <div class="favorite favorite_left"></div>
+									<div
+										class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
+										<span>-$20</span></div>
+									{% endcomment%
+								<div class="product_info">
+									<h6 class="product_name"><a href="">{{product.name}}</a></h6>
+									<div class="product_price">{{product.price}}/-<span>{{product.span_price}}</span></div>
+									
+								</div>
+							
+								<div style="margin-top:25px">
+								<button type="button" class="btn "style="border:1px solid #2c19f1;"><a class="add-to-cart" href="{% url 'cart_add' product.id %}"><b>ADD TO
+										CART</a></button>
+								</div>
+							</div>
+						</div>
+						{% endfor %} {% endcomment %}
+					</div>
+				</div>
+			</div>
+			<div class="more d-flex flex-row-reverse bd-highlight ">
+						<ul >
+								<li class=" button d-flex flex-column justify-content-center align-items-center active is-checked"
+								><a href="{% url 'categories' %} " style="color:red">MORE</a></li>
+							</ul>
+
+						</div>
+		</div>
+	</div>
+
+	{% comment %}
+	<!--product -->
+	<div class="container">
+		<div class="row">
+			{% for product in data %}
+
+			<div class="col-md-3 col-sm-6" style="max-width:23%">
+
+				<div class="product-grid4 vegitables">
+					<div class="product-image4">
+						<a href="">
+							<img class="pic-1" src={{product.image.url}} alt="">
+						</a>
+						<ul class="social">
+							<li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
+							<li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+							<li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+						</ul>
+						<span class="product-new-label">New</span>
+						<span class="product-discount-label">-10%</span>
+					</div>
+					<div class="product-content">
+						<h3 class="title"><a>{{product.name}}</a></h3>
+						<div class="price">
+							${{ product.price}}
+							<span>${{ product.span_price}}</span>
+						</div>
+
+						<div style="padding-bottom:15px">
+							<div class="qty mt-5">
+
+								<a href="{% url 'item_decrement' value.product_id %}"><span
+										class="minus bg-dark">-</span></a>
+								<input type="number" class="count" name="qty" value={{value.quantity}}></input>
+								<a href="{% url 'item_increment' value.product_id %}"><span
+										class="plus bg-dark">+</span></a>
+							</div>
+						</div>
+						<a class="add-to-cart" href="{% url 'cart_add' product.id %}">ADD TO CART</a>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+
+	</div>
+	<hr> {% endcomment %}
+	<!-- Deal of the week -->
+	{% comment %}
+	<div class="deal_ofthe_week">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-lg-6">
+					<div class="deal_ofthe_week_img">
+						<img src="images/deal_ofthe_week.png" alt="">
+					</div>
+				</div>
+				<div class="col-lg-6 text-right deal_ofthe_week_col">
+					<div class="deal_ofthe_week_content d-flex flex-column align-items-center float-right">
+						<div class="section_title">
+							<h2>Deal Of The Week</h2>
+						</div>
+						<ul class="timer">
+							<li class="d-inline-flex flex-column justify-content-center align-items-center">
+								<div id="day" class="timer_num">03</div>
+								<div class="timer_unit">Day</div>
+							</li>
+							<li class="d-inline-flex flex-column justify-content-center align-items-center">
+								<div id="hour" class="timer_num">15</div>
+								<div class="timer_unit">Hours</div>
+							</li>
+							<li class="d-inline-flex flex-column justify-content-center align-items-center">
+								<div id="minute" class="timer_num">45</div>
+								<div class="timer_unit">Mins</div>
+							</li>
+							<li class="d-inline-flex flex-column justify-content-center align-items-center">
+								<div id="second" class="timer_num">23</div>
+								<div class="timer_unit">Sec</div>
+							</li>
+						</ul>
+						<div class="red_button deal_ofthe_week_button"><a href="#">shop now</a></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> {% endcomment %}
+
+	<!-- Best Sellers -->
+
+	<div class="best_sellers">
+		<div class="container" style="border:1px light black;width=100%">
+			<div class="row">
+				<div class="col text-center">
+					<div class="section_title new_arrivals_title">
+						<h2>Best Deals</h2>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<div class="product_slider_container">
+						<div class="owl-carousel owl-theme product_slider">
+
+							<!-- Slide 1 -->
+
+							<div class="owl-item product_slider_item">
+								<div class="product-item">
+									<div class="product discount">
+										<div class="product_image">
+											<img src="{% static 'images/product_1.png'%}" alt="">
+										</div>
+										<div class="favorite favorite_left"></div>
+										<div
+											class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
+											<span>-$20</span></div>
+										<div class="product_info">
+											<h6 class="product_name"><a href="single.html">Fujifilm X100T 16 MP
+													Digital Camera (Silver)</a></h6>
+											<div class="product_price">$520.00<span>$590.00</span></div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Slide 2 -->
+
+							<div class="owl-item product_slider_item">
+								<div class="product-item women">
+									<div class="product">
+										<div class="product_image">
+											<img src="{% static 'images/product_2.png'%}" alt="">
+										</div>
+										<div class="favorite"></div>
+										<div
+											class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center">
+											<span>new</span></div>
+										<div class="product_info">
+											<h6 class="product_name"><a href="single.html">Samsung CF591 Series
+													Curved 27-Inch FHD Monitor</a></h6>
+											<div class="product_price">$610.00</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Slide 3 -->
+
+							<div class="owl-item product_slider_item">
+								<div class="product-item women">
+									<div class="product">
+										<div class="product_image">
+											<img src="{% static 'images/product_3.png'%}" alt="">
+										</div>
+										<div class="favorite"></div>
+										<div class="product_info">
+											<h6 class="product_name"><a href="single.html">Blue Yeti USB
+													Microphone Blackout Edition</a></h6>
+											<div class="product_price">$120.00</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Slide 4 -->
+
+							<div class="owl-item product_slider_item">
+								<div class="product-item accessories">
+									<div class="product">
+										<div class="product_image">
+											<img src="{% static 'images/product_4.png'%}" alt="">
+										</div>
+										<div
+											class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
+											<span>sale</span></div>
+										<div class="favorite favorite_left"></div>
+										<div class="product_info">
+											<h6 class="product_name"><a href="single.html">DYMO LabelWriter 450
+													Turbo Thermal Label Printer</a></h6>
+											<div class="product_price">$410.00</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Slide 5 -->
+
+							<div class="owl-item product_slider_item">
+								<div class="product-item women men">
+									<div class="product">
+										<div class="product_image">
+											<img src="{% static 'images/product_5.png'%}" alt="">
+										</div>
+										<div class="favorite"></div>
+										<div class="product_info">
+											<h6 class="product_name"><a href="single.html">Pryma Headphones,
+													Rose Gold & Grey</a></h6>
+											<div class="product_price">$180.00</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Slide 6 -->
+
+							<div class="owl-item product_slider_item">
+								<div class="product-item accessories">
+									<div class="product discount">
+										<div class="product_image">
+											<img src="{% static 'images/product_6.png'%}" alt="">
+										</div>
+										<div class="favorite favorite_left"></div>
+										<div
+											class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
+											<span>-$20</span></div>
+										<div class="product_info">
+											<h6 class="product_name"><a href="single.html">Fujifilm X100T 16 MP
+													Digital Camera (Silver)</a></h6>
+											<div class="product_price">$520.00<span>$590.00</span></div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Slide 7 -->
+
+							<div class="owl-item product_slider_item">
+								<div class="product-item women">
+									<div class="product">
+										<div class="product_image">
+											<img src="{% static 'images/product_7.png'%}" alt="">
+										</div>
+										<div class="favorite"></div>
+										<div class="product_info">
+											<h6 class="product_name"><a href="single.html">Samsung CF591 Series
+													Curved 27-Inch FHD Monitor</a></h6>
+											<div class="product_price">$610.00</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Slide 8 -->
+
+							<div class="owl-item product_slider_item">
+								<div class="product-item accessories">
+									<div class="product">
+										<div class="product_image">
+											<img src="{% static 'images/product_8.png'%}" alt="">
+										</div>
+										<div class="favorite"></div>
+										<div class="product_info">
+											<h6 class="product_name"><a href="single.html">Blue Yeti USB
+													Microphone Blackout Edition</a></h6>
+											<div class="product_price">$120.00</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Slide 9 -->
+
+							<div class="owl-item product_slider_item">
+								<div class="product-item men">
+									<div class="product">
+										<div class="product_image">
+											<img src="{% static 'images/product_9.png'%}" alt="">
+										</div>
+										<div
+											class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
+											<span>sale</span></div>
+										<div class="favorite favorite_left"></div>
+										<div class="product_info">
+											<h6 class="product_name"><a href="single.html">DYMO LabelWriter 450
+													Turbo Thermal Label Printer</a></h6>
+											<div class="product_price">$410.00</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Slide 10 -->
+
+							<div class="owl-item product_slider_item">
+								<div class="product-item men">
+									<div class="product">
+										<div class="product_image">
+											<img src="{% static 'images/product_10.png'%}" alt="">
+										</div>
+										<div class="favorite"></div>
+										<div class="product_info">
+											<h6 class="product_name"><a href="single.html">Pryma Headphones,
+													Rose Gold & Grey</a></h6>
+											<div class="product_price">$180.00</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Slider Navigation -->
+
+						<div
+							class="product_slider_nav_left product_slider_nav d-flex align-items-center justify-content-center flex-column">
+							<i class="fa fa-chevron-left" aria-hidden="true"></i>
+						</div>
+						<div
+							class="product_slider_nav_right product_slider_nav d-flex align-items-center justify-content-center flex-column">
+							<i class="fa fa-chevron-right" aria-hidden="true"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<!-- Benefit -->
+
+	<div class="benefit">
+		<div class="container">
+			<div class="row benefit_row">
+				<div class="col-lg-3 benefit_col">
+					<div class="benefit_item d-flex flex-row align-items-center">
+						<div class="benefit_icon"><i class="fa fa-truck" aria-hidden="true"></i></div>
+						<div class="benefit_content">
+							<h6>free shipping</h6>
+							<p>Suffered Alteration in Some Form</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 benefit_col">
+					<div class="benefit_item d-flex flex-row align-items-center">
+						<div class="benefit_icon"><i class="fa fa-money" aria-hidden="true"></i></div>
+						<div class="benefit_content">
+							<h6>cach on delivery</h6>
+							<p>The Internet Tend To Repeat</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 benefit_col">
+					<div class="benefit_item d-flex flex-row align-items-center">
+						<div class="benefit_icon"><i class="fa fa-undo" aria-hidden="true"></i></div>
+						<div class="benefit_content">
+							<h6>your safety isour moto </h6>
+							<p>Making it Look Like Readable</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 benefit_col">
+					<div class="benefit_item d-flex flex-row align-items-center">
+						<div class="benefit_icon"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
+						<div class="benefit_content">
+							<h6>opening all week</h6>
+							<p>6AM - 09PM</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Blogs -->
+{% comment %} 
+	<div class="blogs">
+		<div class="container">
+			<div class="row">
+				<div class="col text-center">
+					<div class="section_title">
+						<h2>Latest Blogs</h2>
+					</div>
+				</div>
+			</div>
+			<div class="row blogs_container">
+				<div class="col-lg-4 blog_item_col">
+					<div class="blog_item">
+						<div class="blog_background" style="background-image:url(images/blog_1.jpg)"></div>
+						<div
+							class="blog_content d-flex flex-column align-items-center justify-content-center text-center">
+							<h4 class="blog_title">Here are the trends I see coming this fall</h4>
+							<span class="blog_meta">by admin | dec 01, 2017</span>
+							<a class="blog_more" href="#">Read more</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 blog_item_col">
+					<div class="blog_item">
+						<div class="blog_background" style="background-image:url(images/blog_2.jpg)"></div>
+						<div
+							class="blog_content d-flex flex-column align-items-center justify-content-center text-center">
+							<h4 class="blog_title">Here are the trends I see coming this fall</h4>
+							<span class="blog_meta">by admin | dec 01, 2017</span>
+							<a class="blog_more" href="#">Read more</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 blog_item_col">
+					<div class="blog_item">
+						<div class="blog_background" style="background-image:url(images/blog_3.jpg)"></div>
+						<div
+							class="blog_content d-flex flex-column align-items-center justify-content-center text-center">
+							<h4 class="blog_title">Here are the trends I see coming this fall</h4>
+							<span class="blog_meta">by admin | dec 01, 2017</span>
+							<a class="blog_more" href="#">Read more</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Newsletter -->
+
+	<div class="newsletter">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div
+						class="newsletter_text d-flex flex-column justify-content-center align-items-lg-start align-items-md-center text-center">
+						<h4>Newsletter</h4>
+						<p>Subscribe to our newsletter and get 20% off your first purchase</p>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<form action="post">
+						<div
+							class="newsletter_form d-flex flex-md-row flex-column flex-xs-column align-items-center justify-content-lg-end justify-content-center">
+							<input id="newsletter_email" type="email" placeholder="Your email" required="required"
+								data-error="Valid email is required.">
+							<button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300"
+								value="Submit">subscribe</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div> {% endcomment %}
+
+	<!-- Footer -->
+
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div
+						class="footer_nav_container d-flex flex-sm-row flex-column align-items-center justify-content-lg-start justify-content-center text-center">
+						<ul class="footer_nav">
+							<li><a href="#">Blog</a></li>
+							<li><a href="#">FAQs</a></li>
+							<li><a href="contact.html">Contact us</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div
+						class="footer_social d-flex flex-row align-items-center justify-content-lg-end justify-content-center">
+						<ul>
+							<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+							<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+							<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+							<li><a href="#"><i class="fa fa-skype" aria-hidden="true"></i></a></li>
+							<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="footer_nav_container">
+						<div class="cr">©2018 All Rights Reserverd. This template is made with <i class="fa fa-heart-o"
+								aria-hidden="true"></i> by <a href="#">Colorlib</a></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	
+
+	<script>
+		function storePagePosition() {
+			var page_y = window.pageYOffset;
+			localStorage.setItem("page_y", page_y);
+		}
+
+
+		window.addEventListener("scroll", storePagePosition);
+
+
+		var currentPageY;
+
+		try {
+			currentPageY = localStorage.getItem("page_y");
+
+			if (currentPageY === undefined) {
+				localStorage.setItem("page_y") = 0;
+			}
+
+			window.scrollTo(0, currentPageY);
+		} catch (e) {
+			// no localStorage available
+		}
+	</script>
+
+	<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+	<script src="{% static 'styles/bootstrap4/popper.js' %}"></script>
+	<script src="{% static 'styles/bootstrap4/bootstrap.min.js' %}"></script>
+	<script src="{% static 'plugins/Isotope/isotope.pkgd.min.js'%}"></script>
+	<script src="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
+	<script src="{% static 'plugins/easing/easing.js' %}"></script>
+	<script src="{% static 'js/custom.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">{%load static %}
+{% load cart_tag %}
+
+<head>
+	<title>OnlineStore BETA</title>
+	<meta charset="utf-8">
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="OnlineStore Template">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+		integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+		integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+	</script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"
+		integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf" crossorigin="anonymous">
+	</script>
+
+	<link rel="stylesheet" type="text/css" href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css'%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
+	</script>
+</head>
+<style>
+	<!--quantity
+	-->
+	.qty
+	.count
+	{
+	color:
+	#000;
+	display:
+	inline-block;
+	vertical-align:
+	top;
+	font-size:
+	25px;
+	font-weight:
+	700;
+	line-height:
+	30px;
+	padding:
+	0
+	2px
+	;
+	min-width:
+	35px;
+	text-align:
+	center;
+	}
+	.qty
+	.plus
+	{
+	cursor:
+	pointer;
+	display:
+	inline-block;
+	vertical-align:
+	top;
+	color:
+	white;
+	width:
+	30px;
+	height:
+	30px;
+	font:
+	30px/1
+	Arial,
+	sans-serif;
+	text-align:
+	center;
+	border-radius:
+	50%;
+	}
+	.qty
+	.minus
+	{
+	cursor:
+	pointer;
+	display:
+	inline-block;
+	vertical-align:
+	top;
+	color:
+	white;
+	width:
+	30px;
+	height:
+	30px;
+	font:
+	30px/1
+	Arial,
+	sans-serif;
+	text-align:
+	center;
+	border-radius:
+	50%;
+	background-clip:
+	padding-box;
+	}
+	div
+	{
+	text-align:
+	center;
+	}
+	.minus:hover
+	{
+	background-color:
+	#717fe0
+	 !important;
+	}
+	.plus:hover
+	{
+	background-color:
+	#717fe0
+	 !important;
+	}
+	/*Prevent
+	text
+	selection*/
+	span
+	{
+	-webkit-user-select:
+	none;
+	-moz-user-select:
+	none;
+	-ms-user-select:
+	none;
+	}
+	input
+	{
+	border:
+	1px
+	black;
+	width:
+	13%;
+	margin-left:
+	20px;
+	padding-left:7px
+	margin-top:
+	3px;
+	}
+	nput::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button
+	{
+	-webkit-appearance:
+	none;
+	margin:
+	0;
+	}
+	input:disabled
+	{
+	background-color:white;
+	}
+	/*********************
+	Shopping
+	Demo-4
+	**********************/
+	.product-grid4,
+	.product-grid4
+	.product-image4
+	{
+	position:
+	relative
+	}
+	.product-grid4
+	{
+	font-family:
+	Poppins,
+	sans-serif;
+	text-align:
+	center;
+	border-radius:
+	5px;
+	overflow:
+	hidden;
+	z-index:
+	1;
+	transition:
+	all
+	.3s
+	ease
+	0s
+	}
+	.product-grid4:hover
+	{
+	box-shadow:
+	0
+	0
+	10px
+	rgba(0,
+	0,
+	0,
+	.2)
+	}
+	.product-grid4
+	.product-image4
+	a
+	{
+	display:
+	block
+	}
+	.product-grid4
+	.product-image4
+	img
+	{
+	width:
+	100%;
+	height:
+	100px
+	}
+	.product-grid4
+	.pic-1
+	{
+	opacity:
+	1;
+	transition:
+	all
+	.5s
+	ease-out
+	0s
+	}
+	.product-grid4
+	.product-discount-label,
+	.product-grid4
+	.product-new-label
+	{
+	color:
+	#fff;
+	background-color:
+	#16a085;
+	font-size:
+	13px;
+	font-weight:
+	800;
+	text-transform:
+	uppercase;
+	line-height:
+	45px;
+	height:
+	45px;
+	width:
+	45px;
+	border-radius:
+	50%;
+	position:
+	absolute;
+	left:
+	10px;
+	top:
+	15px;
+	transition:
+	all
+	.3s
+	}
+	.product-grid4
+	.product-discount-label
+	{
+	left:
+	auto;
+	right:
+	10px;
+	background-color:
+	#d7292a
+	}
+	.product-grid4:hover
+	.product-new-label
+	{
+	opacity:
+	0
+	}
+	.product-grid4
+	.product-content
+	{
+	padding:
+	25px
+	}
+	.product-grid4
+	.title
+	{
+	font-size:
+	15px;
+	font-weight:
+	400;
+	text-transform:
+	capitalize;
+	margin:
+	0
+	0
+	7px;
+	transition:all
+	.3s
+	ease
+	0s
+	}
+	.product-grid4
+	.title
+	a
+	{
+	color:
+	#222
+	}
+	.product-grid4
+	.title
+	a:hover
+	{
+	color:
+	#16a085
+	}
+	.product-grid4
+	.price
+	{
+	color:
+	#16a085;
+	font-size:
+	17px;
+	font-weight:
+	700;
+	margin:
+	0
+	2px
+	15px
+	0;
+	display:block
+	}
+	.product-grid4
+	.price
+	span
+	{
+	color:
+	#909090;
+	font-size:
+	13px;
+	font-weight:
+	400;
+	letter-spacing:
+	0;
+	text-decoration:
+	line-through;
+	text-align:
+	left;
+	vertical-align:
+	middle;
+	display:
+	inline-block
+	}
+	.product-grid4
+	.add-to-cart
+	{
+	border:
+	1px
+	solid
+	#e5e5e5;
+	display:inline-block;
+	padding:10px
+	20px;
+	color:#888;
+	font-weight:600;
+	font-size:14px;
+	border-radius:4px;
+	transition:all
+	.3s
+	}
+	.product-grid4:hover
+	.add-to-cart
+	{
+	border:
+	1px
+	solid
+	transparent;
+	background:#16a085;
+	color:#fff
+	}
+	.product-grid4
+	.add-to-cart:hover
+	{
+	background-color:
+	#505050;
+	box-shadow:
+	0
+	0
+	10px
+	rgba(0,
+	0,
+	0,
+	.5)
+	}
+	@media
+	only
+	screen
+	and
+	(max-width:990px)
+	{
+	.product-grid4
+	{
+	margin-bottom:
+	30px
+	}
+	}
+
+</style>
+
+<body>
+	<div class="super_container">
+	
+		<header class="header trans_300 ">
+			<!-- Top Navigation -->
+
+			<!-- Main Navigation -->
+
+			<div class="main_nav_container fixed-top">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-12 text-right" style="margin-bottom:-14px">
+							<div class="logo_container">
+
+								<a href="{% url 'home' %}" style="margin-right: 67px;">Bestoff<span>s</span>
+								</a>
+								{% comment %} <a>
+									<input class="form-control" type="text" placeholder="Search " aria-label="Search"
+										style=" margin-left: -2px; height: 30px;width: 225px; margin-bottom: 20px;"></input>
+								</a> {% endcomment %}
+							</div>
+							<nav class="navbar">
+								<ul class="navbar_user">
+									{% if user.is_authenticated %}
+									<li>
+										<div class="container">
+											<h6>Hello &nbsp {{request.user.email}}</h6>
+										</div>
+										{% endif %}
+
+									</li>
+									<li class="nav-item dropdown">
+										<a class="nav-link dropdown-toggle waves-effect" href="#" id="navbar-account"
+											data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+											<img alt="user avatar"
+												src="https://secure.gravatar.com/avatar/ed1890c4d87cf4bf1f30f0e41a8b6230?s=24&amp;d=mm&amp;r=g"
+												srcset="https://secure.gravatar.com/avatar/ed1890c4d87cf4bf1f30f0e41a8b6230?s=48&amp;d=mm&amp;r=g 2x"
+												class="avatar avatar-24 photo rounded-circle z-depth-0" height="24"
+												width="24"> </a>
+										<div class="dropdown-menu dropdown-menu-right dropdown-info"
+											aria-labelledby="userDropdown" data-dropdown-in="fadeIn"
+											data-dropdown-out="fadeOut">
+											{% if user.is_authenticated%}
+											<a href="{% url 'register_page' %}" id="navbar-static-profile"
+												class="dropdown-item waves-effect " style="margin-left: 22px;">hello
+												{{request.user.email}}</a>
+											{% else %}
+
+
+											<a href="{% url 'register_page' %}" id="navbar-static-profile"
+												class="dropdown-item waves-effect "
+												style="margin-left: 22px;">Register</a>
+											{% endif %}
+											{% if user.is_authenticated %}
+											<a class="dropdown-item mdb-logout-button" href="{% url 'logout' %} "
+												style="margin-left: 20px;">Log Out</a>
+											{% else %}
+											<a class="dropdown-item mdb-logout-button" href="{% url 'login_page' %} "
+												style="margin-left: 20px;">Login</a>
+											{% endif %}
+
+										</div>
+									</li>
+									{% if user.is_authenticated %}
+									<li class="checkout">
+										<a href="{% url 'cartpage' %}">
+											<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+
+											<span id="checkout_items"
+												class="checkout_items">{{request.session.cart|length}} </span>
+										</a>
+									</li>
+									{% endif %}
+
+								
+							</nav>
+						</div>
+						
+					</div>
+				</div>
+				
+			</div>
+			
+
+		</header>
+	<div>
+	</div>
+	<!-- New Arrivals -->
+
+		<div class="new_arrivals"style="margin-top:40px">
+			<div class="container">
+				{% comment %} <div class="row">
+					<div class="col text-center">
+						<div class="section_title new_arrivals_title">
+							<h2>Our Products</h2>
+						</div>
+					</div>
+				</div> {% endcomment %}
+				<div class="row align-items-center">
+					<div class="col text-center">
+						<div class="new_arrivals_sorting">
+							<a>
+									<input class="form-control" type="text" placeholder="Search " aria-label="Search"
+										style=" margin-left: -2px; height: 30px;width: 500px; margin-bottom: 20px;"></input>
+								</a> 
+							<ul class="arrivals_grid_sorting clearfix button-group filters-button-group">
+								<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked"
+									data-filter="*">all</li>
+								<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center"
+									data-filter=".dairy">Dairy</li>
+								<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center"
+									data-filter=".vegetables">vegetables</li>
+								<li class=" button d-flex flex-column justify-content-center align-items-center"
+									data-filter=".grocery" style="margin-right:97px">
+									
+									<div>
+									<div class="dropdown">
+  <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Grocery
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+    <button class="dropdown-item grid_sorting_button"  data-filter=".dairy">dairy<div>
+	</div></button>
+    <button class="dropdown-item grid_sorting_button" data-filter=".vegetables">vegetables</button>
+    <button class="dropdown-item grid_sorting_button"  data-filter=".grocery">grocery</button>
+  </div>
+</div>
+	</div>
+	</li>
+	</ul>
+							
+</div>
+
+	
+</div>
+</div>
+<div class="row">
+<div class="col">
+	<div class="product-grid"
+		data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
+
+		{% for product in data %}
+		<div class="product-item {{product.category}}"
+				style="position: absolute;left: 0px;height: 255px;width: 190px;top: 0px;padding-right:5px;">
+			<div class="produc product_filter"
+				style="border-right: 1px solid rgb(255 255 255 / 97%);width: 190px;padding-top: 20px;">
+				<div class="product_image" >
+				<img src=" {{product.image.url}}" alt="">
+				</div>
+
+				<div class="product_info">
+					<h6 class="product_name"><a href="">{{product.name}}</a></h6>
+					<div class="product_price"> ₹{{product.price}}/-<span>
+							₹{{product.span_price}}/-</span></div>
+
+				</div>
+				
+				<div style="margin-top:25px">
+				{% if user.is_authenticated %}
+					<button type="button" class="btn " style="border:1px solid #2c19f1;"><a
+							class="add-to-cart" href="{% url 'cart_add' product.id %}"><b>ADD TO
+								CART</a></button>
+				{% else %}
+				
+				<button type="button" class="btn " style="border:1px solid #2c19f1;"><a
+							class="add-to-cart" href=""><b>ADD TO
+								CART</a></button>
+				<h6 style="color:red">{{errorl}}</h6>
+				{% endif %}
+			</div>
+			</div>
+
+			</div>
+
+			{% endfor %}
+	</div>
+</div>
+</div>
+</div>
+</div>
+
+	
+
+	<script>
+		function storePagePosition() {
+			var page_y = window.pageYOffset;
+			localStorage.setItem("page_y", page_y);
+		}
+
+
+		window.addEventListener("scroll", storePagePosition);
+
+
+		var currentPageY;
+
+		try {
+			currentPageY = localStorage.getItem("page_y");
+
+			if (currentPageY === undefined) {
+				localStorage.setItem("page_y") = 0;
+			}
+
+			window.scrollTo(0, currentPageY);
+		} catch (e) {
+			// no localStorage available
+		}
+	</script>
+
+	<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+	<script src="{% static 'styles/bootstrap4/popper.js' %}"></script>
+	<script src="{% static 'styles/bootstrap4/bootstrap.min.js' %}"></script>
+	<script src="{% static 'plugins/Isotope/isotope.pkgd.min.js'%}"></script>
+	<script src="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
+	<script src="{% static 'plugins/easing/easing.js' %}"></script>
+	<script src="{% static 'js/custom.js' %}"></script>
+</body>
+
+</html>

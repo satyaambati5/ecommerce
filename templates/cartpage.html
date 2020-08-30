@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">{%load static %}
+{% load cart_tag %}
+
+<head>
+  <title>OnlineStore BETA</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="OnlineStore Template">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"
+    integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf" crossorigin="anonymous">
+  </script>
+
+  {% comment %} <script>
+    function sumation(a, b) {
+      if (typeof a == "number" && typeof b == "number")
+        return (a + b);
+      else
+        alert("wrong input")
+    }
+
+    window.onload = function () {
+
+      var val1 = {
+        {
+          value.price | multiply: value.quantity
+        }
+      };
+      var val2 = 5;
+      var result = sumation(val1, val2);
+      alert(result);
+    };
+  </script> {% endcomment %}
+  <link rel="stylesheet" type="text/css" href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css'%}">
+  <link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
+  <style>
+    <!--quantity
+    -->
+    .qty
+    .count
+    {
+    color:
+    #000;
+    display:
+    inline-block;
+    vertical-align:
+    top;
+    font-size:
+    25px;
+    font-weight:
+    700;
+    line-height:
+    30px;
+    padding:
+    0
+    2px
+    ;
+    min-width:
+    35px;
+    text-align:
+    center;
+    }
+    .qty
+    .plus
+    {
+    cursor:
+    pointer;
+    display:
+    inline-block;
+    vertical-align:
+    top;
+    color:
+    white;
+    width:
+    30px;
+    height:
+    30px;
+    font:
+    30px/1
+    Arial,
+    sans-serif;
+    text-align:
+    center;
+    border-radius:
+    50%;
+    }
+    .qty
+    .minus
+    {
+    cursor:
+    pointer;
+    display:
+    inline-block;
+    vertical-align:
+    top;
+    color:
+    white;
+    width:
+    30px;
+    height:
+    30px;
+    font:
+    30px/1
+    Arial,
+    sans-serif;
+    text-align:
+    center;
+    border-radius:
+    50%;
+    background-clip:
+    padding-box;
+    }
+    div
+    {
+    text-align:
+    center;
+    }
+    .minus:hover
+    {
+    background-color:
+    #717fe0
+     !important;
+    }
+    .plus:hover
+    {
+    background-color:
+    #717fe0
+     !important;
+    }
+    /*Prevent
+    text
+    selection*/
+    span
+    {
+    -webkit-user-select:
+    none;
+    -moz-user-select:
+    none;
+    -ms-user-select:
+    none;
+    }
+    input
+    {
+    border:
+    0;
+    width:
+    12%;
+    margin-left:
+    20px;
+    margin-top:
+    3px;
+    }
+    nput::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button
+    {
+    -webkit-appearance:
+    none;
+    margin:
+    0;
+    }
+    input:disabled
+    {
+    background-color:white;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="super_container">
+
+    <!-- Header -->
+    <header class="header trans_300 ">
+      <!-- Top Navigation -->
+
+      <div class="top_nav" style="background:#145f77">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="top_nav_left">free shipping on all u.s orders over 100/-</div>
+            </div>
+            <div class="col-md-6 text-right">
+              <div class="top_nav_right">
+                <ul class="top_nav_menu">
+
+                  <!-- Currency / Language / My Account -->
+                  {% if user.is_authenticated %}
+                  <li class="account" style="background:#145f77">
+                    <a href="">
+                      My Account
+                      <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="account_selection">
+
+                      <li><a href="{% url 'logout' %} "><i class="fa fa-sign-in" aria-hidden="true"></i>Log Out</a></li>
+
+                    </ul>
+                  </li>
+                  {% else %}
+                  <li class="account" style="background:#145f77">
+                    <a href="#">
+                      My Account
+                      <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="account_selection">
+
+                      <li><a href="{% url 'login_page' %} "><i class="fa fa-sign-in" aria-hidden="true"></i>Log In</a>
+                      </li>
+
+                      <li><a href="{% url 'register_page' %} "><i class="fa fa-user-plus"
+                            aria-hidden="true"></i>Register</a></li>
+                    </ul>
+                  </li>
+                  {% endif %}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Navigation -->
+
+      <div class="main_nav_container">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 text-right" style="margin-bottom:-14px">
+              <div class="logo_container">
+
+                <a href="{% url 'home' %}" style="margin-right: 67px;">Online<span>Store</span>
+                </a>
+                <a>
+                  <input class="form-control" type="text" placeholder="Search " aria-label="Search"
+                    style=" margin-left: -2px; height: 30px;width: 225px; margin-bottom: 20px;"></input>
+                </a>
+              </div>
+              <nav class="navbar">
+                <ul class="navbar_user">
+                  {% if user.is_authenticated %}
+                  <li>
+                    <div class="container">
+                      <h6>Hello &nbsp {{request.user.email}}</h6>
+                    </div>
+                    {% endif %}
+
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle waves-effect" href="#" id="navbar-account" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="true">
+                      <img alt="user avatar"
+                        src="https://secure.gravatar.com/avatar/ed1890c4d87cf4bf1f30f0e41a8b6230?s=24&amp;d=mm&amp;r=g"
+                        srcset="https://secure.gravatar.com/avatar/ed1890c4d87cf4bf1f30f0e41a8b6230?s=48&amp;d=mm&amp;r=g 2x"
+                        class="avatar avatar-24 photo rounded-circle z-depth-0" height="24" width="24"> </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="userDropdown"
+                      data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                      <a href ="{% url 'register_page' %}" id="navbar-static-profile" class="dropdown-item waves-effect " style="margin-left: 22px;">Register</a>
+
+                      {% if user.is_authenticated %}
+                      <a class="dropdown-item mdb-logout-button" href="{% url 'logout' %} "
+                        style="margin-left: 12px;">Log Out</a>
+                      {% else %}
+                      <a class="dropdown-item mdb-logout-button" href="{% url 'login_page' %} "
+                        style="margin-left: 12px;">Login</a>
+                      {% endif %}
+
+                    </div>
+                  </li>
+                  {% if user.is_authenticated %}
+                  <li class="checkout">
+                    <a href="{% url 'cartpage' %}">
+                      <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                      {% load cart_tag %}
+                      <span id="checkout_items" class="checkout_items">{{request.session.cart|length}} </span>
+                    </a>
+                  </li>
+                  {% endif %}
+
+                  {% comment %} <div class="hamburger_container">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                  </div> {% endcomment %}
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </header>
+
+
+    <!--Section: Block Content-->
+    <div class="new_arrivals" style="margin-top:9%">
+      <div class="container">
+        <div class="col text-center" style="margin-bottom:20px">
+          <div class="section_title new_arrivals_title">
+         
+            <h4>Welcome to OnlineStore </h4>
+          
+          </div>
+        </div>
+        <section>
+
+          <!--Grid row-->
+          <div class="row">
+            <!--Grid column-->
+            <div class="col-lg-8" <div class=scroll
+              style="  width: 100%;height: 550px; overflow-x: hidden; overflow-y: visible; text-align:justify; ">
+
+              <!-- Card -->
+
+              <div class="card wish-list mb-3">
+                <div class="card-body">
+
+                  {% comment %} <h5 class="mb-4">Cart (<span>2</span> items)</h5> {% endcomment %}
+                  {% for key,value in request.session.cart.items %}
+
+                  <div class="row mb-4">
+
+                    <div class="col-md-5 col-lg-3 col-xl-3">
+
+                      <div class="view overlay z-depth-1 rounded mb-3 mb-md-0">
+
+                        <img class="img-fluid w-100" src="{{value.image}}" alt="Sample">
+                        <a>
+                          <div class="mask waves-effect waves-light">
+                            <div class="mask rgba-black-slight waves-effect waves-light"></div>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="col-md-7 col-lg-9 col-xl-9">
+                      <div>
+                        <div class="d-flex justify-content-between">
+                          <div>
+                            <h5 style="margin-right:-67px">{{value.name}}</h5>
+                          </div>
+                          <div style="margin-top:-38px ;margin-right:-41px">
+                            <div class="qty mt-5">
+                              <a href="{% url 'item_decrement' value.product_id %}" style="visibility: hidden"><span
+                                  class="minus bg-dark">-</span></a>
+                                  
+                                   <a href="{% url 'item_decrement' value.product_id %}" ><span
+                                  class="minus bg-dark">-</span></a>
+                           
+                              <input type="number" class="count" name="qty quantity" id="test" method="POST" value="{{value.quantity}}"></input>
+                              <a href="{% url 'item_increment' value.product_id %}"><span
+                                  class="plus bg-dark">+</span></a>
+                            </div>
+
+                          </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center">
+
+                          <div style="margin-top:45px;font-size:16px">
+
+                            <a href="{% url 'item_clear' value.product_id %}" type="button"
+                              class="card-link-secondary small text-uppercase mr-3"><i
+                                class="fas fa-trash-alt mr-1"></i> Remove item </a>
+
+                          </div>
+
+                          <p class="mb-0 total" style=" margin-right: 43px;padding-top: 47px;"><span><strong id="total">Total:{{ value.price|multiply:value.quantity }}/-</strong></span></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr class="mb-4">
+                  {% endfor %}
+                  {% if request.session.cart|length == 0 %}
+
+                  <p class="text-primary mb-0"> your cart is empty please <span> <a href= {% url 'categories' %}> click here</a></span> to add some</p>
+                  {% else %}
+                  <p class="text-primary mb-0"><i class="fas  mr-1"></i> Do not delay the purchase, adding
+                    items to your cart does not mean booking them.</p>
+                    {% endif %}
+
+                </div>
+              </div>
+              <!-- Card -->
+
+              <!-- Card -->
+              <div class="card mb-3">
+                <div class="card-body">
+
+                  <h5 class="mb-4">Expected shipping delivery</h5>
+
+                  <p class="mb-0"> Thu., 12.03. - Mon., 16.03.</p>
+                </div>
+              </div>
+              <!-- Card -->
+
+              <!-- Card -->
+              <div class="card mb-3">
+                <div class="card-body">
+
+                  <h5 class="mb-4">We accept</h5>
+
+                  <img class="mr-2" width="45px"
+                    src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
+                    alt="Visa">
+                  <img class="mr-2" width="45px"
+                    src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
+                    alt="American Express">
+                  <img class="mr-2" width="45px"
+                    src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
+                    alt="Mastercard">
+                  <img class="mr-2" width="45px"
+                    src="https://z9t4u9f6.stackpathcdn.com/wp-content/plugins/woocommerce/includes/gateways/paypal/assets/images/paypal.png"
+                    alt="PayPal acceptance mark">
+                </div>
+              </div>
+              <!-- Card -->
+            </div 
+            </div> <!--Grid column-->
+
+            <!--Grid column-->
+
+            <div class="col-lg-4">
+              <!-- Card -->
+              <div class="card mb-3">
+                <div class="card-body">
+
+                  <h5 class="mb-3">The total amount of </h5>
+
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                      Items
+                      <span>{{request.session.cart|length}}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center px-0" id="amount">
+                      Amount
+                      <span id="demo"> {{cart_total_amount}}/-</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                      <div>
+                        <strong>The total amount of</strong>
+                        <strong>
+                          <p class="mb-0">(including VAT)</p>
+                        </strong>
+                      </div>
+                    
+                      <span><strong>
+                      {{cart_total_amount}}/-
+                      </strong></span>
+                    </li>
+                  </ul>
+
+                  <button type="button" class="btn btn-primary btn-block waves-effect waves-light"><a href={% url 'order_summary' %}>go to
+                    checkout</a></button>
+
+                </div>
+              </div>
+              <!-- Card -->
+              
+              {% comment %} <!-- Card -->
+              <div class="card mb-3">
+                <div class="card-body">
+
+                  <a class="dark-grey-text d-flex justify-content-between" data-toggle="collapse"
+                    href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
+                    {{product_name}}
+                    <span><i class="fas fa-chevron-down pt-1"></i></span>
+                  </a>
+                  <a class="dark-grey-text d-flex justify-content-between" data-toggle="collapse"
+                    href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
+                   {{product_price}}
+                    <span><i class="fas fa-chevron-down pt-1"></i></span>
+                  </a>
+                  <a class="dark-grey-text d-flex justify-content-between" data-toggle="collapse"
+                    href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
+                   {{product_quantity}}
+                    <span><i class="fas fa-chevron-down pt-1"></i></span>
+                  </a>
+                  <a class="dark-grey-text d-flex justify-content-between" data-toggle="collapse"
+                    href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
+                    {{ total_amount}}
+                    <span><i class="fas fa-chevron-down pt-1"></i></span>
+                  </a>
+
+                  <div class="collapse" id="collapseExample1">
+                    <div class="mt-3">
+                      <div class="md-form md-outline mb-0">
+                        <input type="text" id="discount-code1" class="form-control font-weight-light"
+                          placeholder="Enter discount code">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Card -->  {% endcomment %}
+
+            </div>
+           
+            <!--Grid column-->
+
+          </div>
+          <!--Grid row-->
+
+        </section>
+        <!--Section: Block Content-->
+      </div>
+    </div>
+    <script>
+      function storePagePosition() {
+        var page_y = window.pageYOffset;
+        localStorage.setItem("page_y", page_y);
+      }
+
+
+      window.addEventListener("scroll", storePagePosition);
+
+
+      var currentPageY;
+
+      try {
+        currentPageY = localStorage.getItem("page_y");
+
+        if (currentPageY === undefined) {
+          localStorage.setItem("page_y") = 0;
+        }
+
+        window.scrollTo(0, currentPageY);
+      } catch (e) {
+        // no localStorage available
+      }
+    </script>
+
+    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'styles/bootstrap4/popper.js' %}"></script>
+    <script src="{% static 'styles/bootstrap4/bootstrap.min.js' %}"></script>
+    <script src="{% static 'plugins/Isotope/isotope.pkgd.min.js'%}"></script>
+    <script src="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
+    <script src="{% static 'plugins/easing/easing.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+
+</body>
+
+</html>

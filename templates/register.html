@@ -1,0 +1,137 @@
+
+{% comment %} {% load static %}
+{% block title %}Your Cart{% endblock title %}
+{% block body %} {% endcomment %}
+<!DOCTYPE html>
+<html lang="en">{%load static %}
+<head>
+<title>OnlineStore BETA</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="OnlineStore Template">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js" integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" >
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css'%}">
+<link rel="stylesheet" href="{% static 'styles/styleLogin.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
+</head>
+
+<body class="form-v8" style="overflow: hidden">
+    <div class="page-content" style="margin-top: -4%;">
+        <div class="form-v8-content" style="background-image: linear-gradient(225deg, #00fff3ed, transparent); background: #3d5c85; border-top-left-radius: 50px;">
+            <div class="form-left">
+                <h1 style="margin-top: 7%; text-align: center;">OnlineStore</h1>
+                <hr>
+                <img src="{% static 'images/banner-.jpg' %}" alt="form" style="margin-top: -1.5%; width: 450px; height: 452px; border-radius: 0px;">
+            </div>
+            <div class="form-right" style="background-image: linear-gradient(-70deg, #00fff3ed, transparent); border-bottom-right-radius: 170px 100px;">
+                <div class="tab">
+                    <div class="tab-inner">
+                        <button class="tablinks" onclick="openCity(event, 'sign-up')" id="defaultOpen">Sign Up</button>
+                    </div>
+                    <div class="tab-inner">
+                        <button class="tablinks" onclick="openCity(event, 'sign-in')">Sign In</button>
+                    </div>
+                </div>
+
+                <div class="form-detail">
+                    <form action="{% url 'save' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="tabcontent" id="sign-up">
+                            <div class="form-row">
+                                <label class="form-row-inner">
+								<input type="text" name="full_name" id="full_name" class="input-text" required>
+								<span class="label">Username</span>
+		  						<span class="border"></span>
+							</label>
+                            </div>
+                            <div class="form-row">
+                                <label class="form-row-inner">
+								<input type="text" name="email" id="your_email" class="input-text" required>
+								<span class="label">E-Mail</span>
+		  						<span class="border"></span>
+							</label>
+                            </div>
+                            <div class="form-row">
+                                <label class="form-row-inner">
+								<input type="password" name="password" id="password" class="input-text" required>
+								<span class="label">Password</span>
+								<span class="border"></span>
+							</label>
+                            </div>
+                            <div class="form-row">
+                                <label class="form-row-inner">
+								<input type="password" name="comfirm_password" id="comfirm_password" class="input-text" required>
+								<span class="label">Comfirm Password</span>
+								<span class="border"></span>
+							</label>
+                            </div>
+                            <div class="form-row-last">
+                                <input type="submit" name="register" class="register" value="Register">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="form-detail">
+                    <form action="{% url 'login' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="tabcontent" id="sign-in">
+                            <div class="form-row">
+                                <label class="form-row-inner">
+								<input type="text" name="full_name_1" id="full_name_1" class="input-text" required>
+								<span class="label">Username</span>
+		  						<span class="border"></span>
+							</label>
+                            </div>
+                            <div class="form-row">
+                                <label class="form-row-inner">
+								<input type="password" name="password_1" id="password_1" class="input-text" required>
+								<span class="label">Password</span>
+								<span class="border"></span>
+							</label>
+                            </div>
+                            <div class="form-row">
+                                <label class="form-row-inner">
+								<a href="#" style="text-decoration: none;">&nbsp;&nbsp;forgot Password?</a>
+							</label>
+                            </div>
+                            <div class="form-row-last">
+                                <input type="submit" name="register" class="register" value="Sign In">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function openCity(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+    </script>
+</body>
+
+</html>

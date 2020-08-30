@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">{%load static %}
+<head>
+<title>OnlineStore BETA</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="OnlineStore Template">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js" integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf" crossorigin="anonymous"></script>
+{% comment %} 
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!-- Include the above in your HEAD tag -->
+{% endcomment %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" >
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css'%}">
+<link rel="stylesheet" href="{% static 'styles/styleLogin.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
+</head>
+
+<body >
+
+<div class="container" style="border-bottom:1px solid black;text-align:center">
+	
+	<h4>Welcome To OnlineStore Login </h4> 
+    
+</div>
+
+<div class="container" style="border:1px solid black;">
+  
+    <fieldset >
+    <form class="form-horizontal" action="{% url 'login' %}" method="POST">
+    {% csrf_token %}
+    <h4 >Please login </h4>
+    
+    <!-- Text input-->
+    <div class="form-group">
+    <label class="col-md-4 control-label" for="textinput">Email</label>  
+    <div class="col-md-4">
+    <input id="textinput" name="email_login" id="your_email" placeholder="Enter your Email" class="form-control input-md"style="color:black" required="" type="text">
+    <span class="help-block"> </span>  
+    </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+    <label class="col-md-4 control-label" for="textinput">Password</label>  
+    <div class="col-md-4">
+    <input id="textinput" name="password_1" placeholder="Enter your Password" class="form-control input-md" required="" type="password" style="color:black">
+    <span class="help-block"style="color:red">{{error}} </span>  
+    </div>
+    </div>
+    {% comment %} <!--error msg-->
+
+    <div class="form-group">
+    <label class="col-md-4 control-label" style="color:red">{{error}}</label>  
+    <div class="col-md-4">
+    <span class="help-block"> </span>  
+    </div>
+    </div> {% endcomment %}
+    <!-- Button -->
+    <div class="form-group">
+    <label class="col-md-4 control-label" for="singlebutton"> </label>
+    <div class="col-md-4">
+    <button id="singlebutton" name="login" value="login" class="btn btn-primary">Log In </button>
+    </div>
+    </div>
+    </form>
+     
+    </fieldset>
+
+    
+</div>
+             
+</body>
+
+</html>
