@@ -81,26 +81,26 @@ CART_SESSION_ID = 'cart'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'ecommerce',
-#         'USER': 'postgres',
-#         'PASSWORD': 'onlinestore',
-#         'HOST': 'localhost'
-
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd2bb7p6mnerl8q',
-        'USER': 'bpfbttppzgfmav',
-        'PASSWORD': '3827ac707ce4af6abeece6258ab2cf9ba8617fb56456ac012cfb72cb06a4bda3',
-        'HOST': 'ec2-54-86-57-171.compute-1.amazonaws.com'
+        'NAME': 'ecommerce',
+        'USER': 'postgres',
+        'PASSWORD': 'onlinestore',
+        'HOST': 'localhost'
 
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'd2bb7p6mnerl8q',
+#         'USER': 'bpfbttppzgfmav',
+#         'PASSWORD': '3827ac707ce4af6abeece6258ab2cf9ba8617fb56456ac012cfb72cb06a4bda3',
+#         'HOST': 'ec2-54-86-57-171.compute-1.amazonaws.com'
+
+#     }
+# }
 # SECRET_KEY = config('SECRET_KEY')
 # DEBUG = config('DEBUG', default=False, cast=bool)
 # DATABASES = {
